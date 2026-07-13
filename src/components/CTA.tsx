@@ -1,8 +1,9 @@
 "use client";
 import { Phone } from "lucide-react";
-import { WA_LINK } from "@/lib/constants";
+import { WA_LINK, WA_PREP_NOTE } from "@/lib/constants";
 
 export default function CTA() {
+  const waLink = `${WA_LINK}?text=${encodeURIComponent(WA_PREP_NOTE + "Halo, saya ingin menggunakan jasa Tambal Ban Mobile.")}`;
   return (
     <section className="py-16 md:py-20 lg:py-28 bg-gradient-to-br from-red-600 to-red-700 relative overflow-hidden">
       <div className="absolute inset-0">
@@ -16,7 +17,7 @@ export default function CTA() {
         </h2>
         <p className="text-base md:text-xl text-red-100 mb-8 md:mb-10">Tidak perlu panik. Hubungi kami sekarang juga.</p>
         <a
-          href={WA_LINK}
+          href={waLink}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2.5 bg-white text-red-600 hover:bg-red-50 px-6 md:px-8 py-3.5 md:py-4 rounded-xl text-base md:text-lg font-bold transition-all shadow-2xl hover:shadow-white/25 hover:-translate-y-0.5 active:translate-y-0"

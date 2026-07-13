@@ -50,6 +50,7 @@ export default function Estimator() {
     tambahanMalam: tambahanMalamMin || undefined,
     totalMin: grandTotalMin || undefined,
     totalMax: grandTotalMax || undefined,
+    denganPersiapan: true,
   });
 
   return (

@@ -9,6 +9,7 @@ const GMAPS_EMBED =
 export default function Location() {
   const waMsg = waMessage({
     lokasi: "Bengkel Prapatan - Desa Pangauban, Kec. Lelea, Indramayu",
+    denganPersiapan: true,
   });
 
   return (

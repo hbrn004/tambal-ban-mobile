@@ -1,6 +1,6 @@
 "use client";
 import { Wrench, Settings, Truck, AlertTriangle } from "lucide-react";
-import { WA_LINK, waMessage } from "@/lib/constants";
+import { WA_LINK, waMessage, WA_PREP_NOTE } from "@/lib/constants";
 
 const services = [
   {
@@ -64,7 +64,7 @@ export default function Services() {
                       Estimasi {svc.price}
                     </span>
                     <a
-                      href={`${WA_LINK}?text=${waMessage({ layanan: svc.title })}`}
+                      href={`${WA_LINK}?text=${encodeURIComponent(WA_PREP_NOTE)}${waMessage({ layanan: svc.title })}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm font-semibold text-red-600 hover:text-red-700 hover:underline inline-flex items-center gap-1"

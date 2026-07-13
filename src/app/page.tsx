@@ -3,10 +3,13 @@ import About from "@/components/About";
 import Services from "@/components/Services";
 import Pricing from "@/components/Pricing";
 import Estimator from "@/components/Estimator";
+import Location from "@/components/Location";
+import ConfirmationSection from "@/components/ConfirmationSection";
+import CancellationPolicy from "@/components/CancellationPolicy";
+import ConfirmationBadge from "@/components/ConfirmationBadge";
 import HowToOrder from "@/components/HowToOrder";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
-import Location from "@/components/Location";
 
 export default function Home() {
   return (
@@ -17,6 +20,9 @@ export default function Home() {
       <Pricing />
       <Estimator />
       <Location />
+      <ConfirmationSection />
+      <CancellationPolicy />
+      <ConfirmationBadge />
       <HowToOrder />
       <FAQ />
       <CTA />

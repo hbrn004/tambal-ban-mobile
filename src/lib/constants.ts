@@ -1,6 +1,8 @@
 export const WA_NUMBER = "6283154701592";
 export const WA_LINK = `https://wa.me/${WA_NUMBER}`;
 
+export const WA_PREP_NOTE = "Mohon siapkan:\n✅ Live Location\n✅ Foto ban atau komponen yang bermasalah\n✅ Nomor telepon aktif yang dapat dihubungi\n\nAgar teknisi dapat segera berangkat ke lokasi.\n";
+
 export function waMessage(params: {
   nama?: string;
   lokasi?: string;
@@ -12,8 +14,12 @@ export function waMessage(params: {
   tambahanMalam?: number;
   totalMin?: number;
   totalMax?: number;
+  /** Include preparation note before the main message */
+  denganPersiapan?: boolean;
 }): string {
-  const parts = ["Halo, saya ingin menggunakan jasa Tambal Ban Mobile."];
+  const parts: string[] = [];
+  if (params.denganPersiapan) parts.push(WA_PREP_NOTE);
+  parts.push("Halo, saya ingin menggunakan jasa Tambal Ban Mobile.");
   if (params.nama) parts.push(`\nNama: ${params.nama}`);
   if (params.lokasi) parts.push(`Lokasi: ${params.lokasi}`);
   if (params.jarak) parts.push(`Jarak: ${params.jarak} KM`);
