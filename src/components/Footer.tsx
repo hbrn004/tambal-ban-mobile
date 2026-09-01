@@ -71,7 +71,6 @@ export default function Footer() {
               <li>Tambal Ban Tubeless</li>
               <li>Tambal Ban Dalam</li>
               <li>Ganti Ban Dalam</li>
-              <li>Step ke Bengkel</li>
             </ul>
           </div>
         </div>

@@ -1,5 +1,5 @@
 "use client";
-import { Wrench, Settings, Truck, AlertTriangle } from "lucide-react";
+import { Wrench, Settings, Truck } from "lucide-react";
 import { WA_LINK, waMessage, WA_PREP_NOTE } from "@/lib/constants";
 
 const services = [
@@ -20,12 +20,6 @@ const services = [
     title: "Ganti Ban Dalam",
     desc: "Melayani penggantian ban dalam apabila ban sudah tidak layak ditambal.",
     price: "Rp45.000 – Rp50.000",
-  },
-  {
-    icon: AlertTriangle,
-    title: "Step ke Bengkel",
-    desc: "Apabila kerusakan tidak dapat diperbaiki di lokasi, kami siap membantu membawa kendaraan ke bengkel terdekat.",
-    price: "Rp10.000 – Rp20.000",
   },
 ];
 

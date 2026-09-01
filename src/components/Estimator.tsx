@@ -7,7 +7,6 @@ const services = [
   { id: "tubeless", label: "Tambal Ban Tubeless", priceMin: 15000, priceMax: 20000 },
   { id: "tube", label: "Tambal Ban Dalam", priceMin: 15000, priceMax: 20000 },
   { id: "ganti", label: "Ganti Ban Dalam", priceMin: 45000, priceMax: 50000 },
-  { id: "step", label: "Step ke Bengkel", priceMin: 10000, priceMax: 20000 },
 ];
 
 function formatRupiah(n: number): string {
