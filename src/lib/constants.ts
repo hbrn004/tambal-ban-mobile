@@ -1,4 +1,4 @@
-export const WA_NUMBER = "6283154701592";
+export const WA_NUMBER = "6283143401874";
 export const WA_LINK = `https://wa.me/${WA_NUMBER}`;
 
 export const WA_PREP_NOTE = "Mohon siapkan:\n✅ Live Location\n✅ Foto ban atau komponen yang bermasalah\n✅ Nomor telepon aktif yang dapat dihubungi\n\nAgar teknisi dapat segera berangkat ke lokasi.\n";

@@ -30,7 +30,7 @@ export default function Footer() {
             <div className="space-y-2.5">
               <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors text-sm">
                 <Phone className="w-4 h-4 text-red-500 shrink-0" />
-                <span>0831-5470-1592</span>
+                <span>+62 831-4340-1874</span>
               </a>
               <div className="flex items-start gap-3 text-gray-400 text-sm">
                 <MapPin className="w-4 h-4 text-red-500 mt-0.5 shrink-0" />
@@ -102,7 +102,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="text-xs md:text-sm text-gray-400 hover:text-white transition-colors"
           >
-            WhatsApp: 0831-5470-1592
+            WhatsApp: +62 831-4340-1874
           </a>
         </div>
       </div>
