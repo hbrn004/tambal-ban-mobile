@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Services from "@/components/Services";
+import BrandLogoCarousel from "@/components/BrandLogoCarousel";
 import Pricing from "@/components/Pricing";
 import Estimator from "@/components/Estimator";
 import Location from "@/components/Location";
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <About />
       <Services />
+      <BrandLogoCarousel />
       <Pricing />
       <Estimator />
       <Location />
