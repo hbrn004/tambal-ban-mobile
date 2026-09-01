@@ -78,7 +78,7 @@ export default function BrandLogoCarousel() {
         </p>
         <p className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto">
           Kami menyediakan pilihan ban dari merek-merek terpercaya dengan kualitas yang dapat
-          diandalkan untuk kebutuhan motor dan mobil Anda.
+          diandalkan untuk kebutuhan motor Anda.
         </p>
       </div>
 
