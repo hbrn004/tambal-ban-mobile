@@ -51,7 +51,7 @@ body {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 36s linear infinite;
+  animation: marquee 45s linear infinite;
   will-change: transform;
 }
 .marquee-track:hover {

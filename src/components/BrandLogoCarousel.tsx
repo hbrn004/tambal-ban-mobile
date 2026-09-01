@@ -11,29 +11,34 @@ const BRANDS = [
   { name: "MAXXIS", src: "/logos/maxxis.png", dark: false },
 ];
 
+/**
+ * Every logo sits inside the SAME viewport box (w-full x h-11 md:h-14)
+ * with object-contain, so all brands get an equal visual footprint —
+ * regardless of their original aspect ratio. No distortion, no tiny outliers.
+ */
 function LogoCard({ brand }: { brand: (typeof BRANDS)[number] }) {
-  if (brand.dark) {
-    // White logos need a dark swatch for contrast on the white card
-    return (
-      <div className="bg-gray-900 rounded-lg h-11 md:h-14 w-full flex items-center justify-center px-2">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={brand.src}
-          alt={brand.name}
-          loading="lazy"
-          className="max-h-8 md:max-h-10 max-w-full object-contain"
-        />
-      </div>
-    );
-  }
-  return (
+  const img = (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={brand.src}
       alt={brand.name}
       loading="lazy"
-      className="max-h-11 md:max-h-16 max-w-[90%] object-contain"
+      className="w-full h-full object-contain"
     />
+  );
+
+  if (brand.dark) {
+    // White logos need a dark swatch for contrast on the white card
+    return (
+      <div className="bg-gray-900 rounded-lg w-full h-11 md:h-14 flex items-center justify-center overflow-hidden">
+        {img}
+      </div>
+    );
+  }
+  return (
+    <div className="w-full h-11 md:h-14 flex items-center justify-center overflow-hidden">
+      {img}
+    </div>
   );
 }
 
@@ -43,7 +48,7 @@ function LogoSet({ ariaHidden = false }: { ariaHidden?: boolean }) {
       {BRANDS.map((brand) => (
         <div
           key={brand.name}
-          className="mx-2.5 md:mx-3 w-36 md:w-48 h-16 md:h-20 bg-white border border-gray-100 rounded-xl shadow-sm flex items-center justify-center px-3 md:px-4"
+          className="mx-2.5 md:mx-3 w-40 md:w-80 h-16 md:h-20 bg-white border border-gray-100 rounded-xl shadow-sm flex items-center justify-center px-2.5 md:px-3"
         >
           <LogoCard brand={brand} />
         </div>
