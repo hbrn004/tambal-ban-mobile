@@ -67,12 +67,6 @@ export default function BrandLogoCarousel() {
       className="py-10 md:py-14 bg-white border-y border-gray-100 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-7 md:mb-9 text-center">
-        <span className="text-red-600 font-semibold text-xs tracking-[0.2em] uppercase">
-          LAYANI BERBAGAI
-        </span>
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mt-2 mb-2 leading-tight">
-          KEBUTUHAN
-        </h2>
         <p className="text-gray-900 font-semibold text-base md:text-lg mb-2">
           Ban Berkualitas, Perjalanan Lebih Aman
         </p>
