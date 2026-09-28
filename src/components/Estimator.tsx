@@ -1,54 +1,47 @@
 "use client";
+
 import { useState } from "react";
-import { Calculator, Send, Moon, Sun } from "lucide-react";
+import { Calculator, Send, Moon, Sun, AlertCircle } from "lucide-react";
 import { WA_LINK, waMessage } from "@/lib/constants";
-
-const services = [
-  { id: "tubeless", label: "Tambal Ban Tubeless", priceMin: 15000, priceMax: 20000 },
-  { id: "tube", label: "Tambal Ban Dalam", priceMin: 15000, priceMax: 20000 },
-  { id: "ganti", label: "Ganti Ban Dalam", priceMin: 45000, priceMax: 50000 },
-];
-
-function formatRupiah(n: number): string {
-  return "Rp" + n.toLocaleString("id-ID");
-}
+import {
+  SERVICES,
+  MESSAGES,
+  calculateEstimate,
+  formatRupiah,
+  type EstimateBreakdown,
+} from "@/lib/pricing";
 
 export default function Estimator() {
-  const [jarak, setJarak] = useState<number>(0);
-  const [biayaJasaMin, setBiayaJasaMin] = useState<number>(0);
-  const [biayaJasaMax, setBiayaJasaMax] = useState<number>(0);
-  const [layananTerpilih, setLayananTerpilih] = useState("");
+  const [distanceInput, setDistanceInput] = useState<string>("");
+  const [serviceId, setServiceId] = useState<string>("");
   const [isMalam, setIsMalam] = useState(false);
 
-  const biayaPerjalanan = Math.ceil(jarak / 3) * 10000;
-  const totalMin = biayaPerjalanan + biayaJasaMin;
-  const totalMax = biayaPerjalanan + biayaJasaMax;
-  const tambahanMalamMin = isMalam ? Math.round(totalMin * 0.3) : 0;
-  const tambahanMalamMax = isMalam ? Math.round(totalMax * 0.3) : 0;
-  const grandTotalMin = totalMin + tambahanMalamMin;
-  const grandTotalMax = totalMax + tambahanMalamMax;
+  // Recompute the whole estimate from the pricing config on every render.
+  // Nothing price-related is ever read back from state or user input.
+  const serviceSelected = serviceId !== "";
+  const result =
+    serviceSelected && distanceInput.trim() !== ""
+      ? calculateEstimate({ distance: distanceInput, serviceId, isNight: isMalam })
+      : null;
 
-  const pilihLayanan = (id: string, priceMin: number, priceMax: number, label: string) => {
-    if (layananTerpilih === label) {
-      setLayananTerpilih("");
-      setBiayaJasaMin(0);
-      setBiayaJasaMax(0);
-    } else {
-      setLayananTerpilih(label);
-      setBiayaJasaMin(priceMin);
-      setBiayaJasaMax(priceMax);
-    }
-  };
+  const breakdown: EstimateBreakdown | null = result?.ok ? result.breakdown : null;
+  const errorMessage: string | null = !serviceSelected
+    ? null
+    : distanceInput.trim() === ""
+      ? MESSAGES.invalidDistance
+      : result && !result.ok
+        ? result.error
+        : null;
 
   const msg = waMessage({
-    jarak: jarak || undefined,
-    layanan: layananTerpilih || undefined,
-    biayaPerjalanan: biayaPerjalanan || undefined,
-    biayaJasaMin: biayaJasaMin || undefined,
-    biayaJasaMax: biayaJasaMax || undefined,
-    tambahanMalam: tambahanMalamMin || undefined,
-    totalMin: grandTotalMin || undefined,
-    totalMax: grandTotalMax || undefined,
+    jarak: breakdown?.roundedDistance || undefined,
+    layanan: breakdown?.serviceLabel || undefined,
+    biayaPerjalanan: breakdown?.travelFee || undefined,
+    biayaJasaMin: breakdown?.serviceMin || undefined,
+    biayaJasaMax: breakdown?.serviceMax || undefined,
+    tambahanMalam: breakdown?.nightMin || undefined,
+    totalMin: breakdown?.totalMin || undefined,
+    totalMax: breakdown?.totalMax || undefined,
     denganPersiapan: true,
   });
 
@@ -60,7 +53,9 @@ export default function Estimator() {
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-3 mb-4 leading-tight">
             Kalkulator Biaya
           </h2>
-          <p className="text-gray-600 text-sm md:text-base">Hitung estimasi biaya perjalanan dan layanan dengan mudah.</p>
+          <p className="text-gray-600 text-sm md:text-base">
+            Hitung estimasi biaya perjalanan dan layanan dengan mudah.
+          </p>
         </div>
 
         <div className="bg-white rounded-xl shadow-md border border-gray-100 p-5 md:p-8" data-aos="fade-up">
@@ -70,11 +65,11 @@ export default function Estimator() {
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-1.5">Jarak (KM)</label>
                 <input
-                  type="number"
-                  min="0"
+                  type="text"
+                  inputMode="decimal"
                   placeholder="Masukkan jarak dalam KM"
-                  value={jarak || ""}
-                  onChange={(e) => setJarak(Math.max(0, Number(e.target.value) || 0))}
+                  value={distanceInput}
+                  onChange={(e) => setDistanceInput(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all text-sm"
                 />
               </div>
@@ -82,18 +77,20 @@ export default function Estimator() {
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Pilih Layanan</label>
                 <div className="grid grid-cols-1 gap-2">
-                  {services.map((s) => (
+                  {SERVICES.map((s) => (
                     <button
                       key={s.id}
-                      onClick={() => pilihLayanan(s.id, s.priceMin, s.priceMax, s.label)}
+                      onClick={() => setServiceId(serviceId === s.id ? "" : s.id)}
                       className={`text-left px-4 py-3 rounded-xl border text-sm transition-all ${
-                        layananTerpilih === s.label
+                        serviceId === s.id
                           ? "border-red-500 bg-red-50 text-red-700 font-semibold"
                           : "border-gray-200 bg-white hover:border-gray-300 text-gray-700"
                       }`}
                     >
                       <span>{s.label}</span>
-                      <span className="float-right text-gray-500 text-xs">{formatRupiah(s.priceMin)} – {formatRupiah(s.priceMax)}</span>
+                      <span className="float-right text-gray-500 text-xs">
+                        {formatRupiah(s.priceMin)} – {formatRupiah(s.priceMax)}
+                      </span>
                     </button>
                   ))}
                 </div>
@@ -132,25 +129,34 @@ export default function Estimator() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
                   <div>
-                    <span className="text-sm text-gray-600">Biaya Perjalanan</span>
-                    <p className="text-[10px] text-gray-400">dihitung berdasarkan estimasi jarak</p>
+                    <span className="text-sm text-gray-600">Harga Jasa</span>
+                    <p className="text-[10px] text-gray-400">sesuai jenis layanan terpilih</p>
                   </div>
-                  <span className="text-sm font-bold text-gray-900">{formatRupiah(biayaPerjalanan)}</span>
+                  <span className="text-sm font-bold text-gray-900">
+                    {breakdown
+                      ? `${formatRupiah(breakdown.serviceMin)} – ${formatRupiah(breakdown.serviceMax)}`
+                      : "-"}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between py-2 border-b border-gray-200 last:border-0">
                   <div>
-                    <span className="text-sm text-gray-600">Biaya Jasa</span>
-                    <p className="text-[10px] text-gray-400">menggunakan rentang harga sesuai jenis layanan</p>
+                    <span className="text-sm text-gray-600">Biaya Perjalanan</span>
+                    <p className="text-[10px] text-gray-400">
+                      {breakdown && breakdown.roundedDistance > 0
+                        ? `${breakdown.roundedDistance} KM × Rp2.500 (min Rp10.000)`
+                        : "dihitung berdasarkan estimasi jarak"}
+                    </p>
                   </div>
                   <span className="text-sm font-bold text-gray-900">
-                    {biayaJasaMin > 0 ? `${formatRupiah(biayaJasaMin)} – ${formatRupiah(biayaJasaMax)}` : "-"}
+                    {breakdown ? formatRupiah(breakdown.travelFee) : "-"}
                   </span>
                 </div>
-                {tambahanMalamMin > 0 && (
+                {breakdown?.isNight && (
                   <div className="flex items-center justify-between py-2 border-b border-yellow-200 last:border-0">
-                    <span className="text-sm text-yellow-700">Tambahan Malam (30%)</span>
+                    <span className="text-sm text-yellow-700">Biaya Malam (30%)</span>
                     <span className="text-sm font-bold text-yellow-700">
-                      + {formatRupiah(tambahanMalamMin)} {tambahanMalamMax > tambahanMalamMin ? `– ${formatRupiah(tambahanMalamMax)}` : ""}
+                      + {formatRupiah(breakdown.nightMin)}
+                      {breakdown.nightMax > breakdown.nightMin ? ` – ${formatRupiah(breakdown.nightMax)}` : ""}
                     </span>
                   </div>
                 )}
@@ -158,10 +164,23 @@ export default function Estimator() {
                   <div className="flex items-center justify-between">
                     <span className="text-sm md:text-base font-bold text-gray-900">Estimasi Total</span>
                     <span className="text-lg md:text-xl font-bold text-red-600">
-                      {grandTotalMin > 0 ? `${formatRupiah(grandTotalMin)} – ${formatRupiah(grandTotalMax)}` : formatRupiah(0)}
+                      {breakdown
+                        ? `${formatRupiah(breakdown.totalMin)} – ${formatRupiah(breakdown.totalMax)}`
+                        : "-"}
                     </span>
                   </div>
                 </div>
+
+                {errorMessage && (
+                  <div
+                    role="alert"
+                    className="flex items-start gap-2 p-3 bg-red-50 border border-red-200 rounded-xl"
+                  >
+                    <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                    <span className="text-xs text-red-700 leading-relaxed">{errorMessage}</span>
+                  </div>
+                )}
+
                 <p className="text-xs text-gray-400 mt-3 leading-relaxed">
                   *Biaya jasa sesuai tingkat pekerjaan. Harga dapat berbeda di lapangan.
                 </p>
@@ -170,15 +189,27 @@ export default function Estimator() {
                 </p>
               </div>
 
-              <a
-                href={`${WA_LINK}?text=${msg}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-3.5 rounded-xl text-sm font-bold transition-all shadow-md hover:shadow-lg"
-              >
-                <Send className="w-4 h-4" />
-                Pesan via WhatsApp
-              </a>
+              {breakdown ? (
+                <a
+                  href={`${WA_LINK}?text=${msg}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 w-full inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-5 py-3.5 rounded-xl text-sm font-bold transition-all shadow-md hover:shadow-lg"
+                >
+                  <Send className="w-4 h-4" />
+                  Pesan via WhatsApp
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  disabled
+                  aria-disabled="true"
+                  className="mt-5 w-full inline-flex items-center justify-center gap-2 bg-gray-300 text-white px-5 py-3.5 rounded-xl text-sm font-bold cursor-not-allowed"
+                >
+                  <Send className="w-4 h-4" />
+                  Pesan via WhatsApp
+                </button>
+              )}
 
               {/* Catatan info box */}
               <div className="mt-4 p-4 bg-blue-50 border border-blue-100 rounded-xl">

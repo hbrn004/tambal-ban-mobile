@@ -1,5 +1,9 @@
 "use client";
 import { Info } from "lucide-react";
+import { PRICE_PER_KM, MIN_TRAVEL_FEE, NIGHT_SURCHARGE_PERCENT, formatRupiah } from "@/lib/pricing";
+
+/** Sample distances shown in the fare table — values come from the pricing config. */
+const SAMPLE_DISTANCES = [3, 5, 10, 15, 20];
 
 export default function Pricing() {
   return (
@@ -20,20 +24,18 @@ export default function Pricing() {
           <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6 md:p-8">
             <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3">Biaya Perjalanan</h3>
             <p className="text-3xl md:text-4xl font-extrabold text-red-600 mb-1">
-              Rp10.000 <span className="text-base font-normal text-gray-500">/ 3 KM</span>
+              {formatRupiah(PRICE_PER_KM)} <span className="text-base font-normal text-gray-500">/ KM</span>
             </p>
-            <p className="text-gray-500 text-sm mb-5">Setiap kelipatan 3 kilometer dikenakan biaya Rp10.000</p>
+            <p className="text-gray-500 text-sm mb-5">
+              Minimum {formatRupiah(MIN_TRAVEL_FEE)} per perjalanan. Jarak dibulatkan ke atas per kilometer.
+            </p>
             <div className="space-y-2">
-              {[
-                ["0 - 3 KM", "Rp10.000"],
-                ["3 - 6 KM", "Rp20.000"],
-                ["6 - 9 KM", "Rp30.000"],
-                ["9 - 12 KM", "Rp40.000"],
-                ["12+ KM", "Rp10.000 / 3 KM"],
-              ].map(([range, price]) => (
-                <div key={range} className="flex items-center justify-between py-2.5 px-4 bg-gray-50 rounded-xl">
-                  <span className="text-sm md:text-base text-gray-700 font-medium">{range}</span>
-                  <span className="text-sm md:text-base text-gray-900 font-semibold">{price}</span>
+              {SAMPLE_DISTANCES.map((km) => (
+                <div key={km} className="flex items-center justify-between py-2.5 px-4 bg-gray-50 rounded-xl">
+                  <span className="text-sm md:text-base text-gray-700 font-medium">{km} KM</span>
+                  <span className="text-sm md:text-base text-gray-900 font-semibold">
+                    {formatRupiah(Math.max(MIN_TRAVEL_FEE, km * PRICE_PER_KM))}
+                  </span>
                 </div>
               ))}
             </div>
@@ -60,7 +62,7 @@ export default function Pricing() {
                 </div>
                 <p className="text-gray-300 text-sm md:text-base leading-relaxed">
                   Layanan malam dikenakan tambahan biaya sebesar{" "}
-                  <span className="text-yellow-400 font-bold">30%</span> dari total biaya
+                  <span className="text-yellow-400 font-bold">{NIGHT_SURCHARGE_PERCENT}%</span> dari total biaya
                   (biaya perjalanan + biaya jasa).
                 </p>
               </div>

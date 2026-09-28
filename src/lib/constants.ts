@@ -1,3 +1,5 @@
+import { formatRupiah } from "@/lib/pricing";
+
 export const WA_NUMBER = "6283143401874";
 export const WA_LINK = `https://wa.me/${WA_NUMBER}`;
 
@@ -25,13 +27,13 @@ export function waMessage(params: {
   if (params.jarak) parts.push(`Jarak: ${params.jarak} KM`);
   if (params.layanan) parts.push(`Layanan: ${params.layanan}`);
   if (params.biayaPerjalanan)
-    parts.push(`Estimasi Biaya Perjalanan: Rp${params.biayaPerjalanan.toLocaleString()}`);
+    parts.push(`Estimasi Biaya Perjalanan: ${formatRupiah(params.biayaPerjalanan)}`);
   if (params.biayaJasaMin && params.biayaJasaMax)
-    parts.push(`Estimasi Biaya Jasa: Rp${params.biayaJasaMin.toLocaleString()} – Rp${params.biayaJasaMax.toLocaleString()}`);
+    parts.push(`Estimasi Biaya Jasa: ${formatRupiah(params.biayaJasaMin)} – ${formatRupiah(params.biayaJasaMax)}`);
   if (params.tambahanMalam)
-    parts.push(`Tambahan Malam (30%): Rp${params.tambahanMalam.toLocaleString()}`);
+    parts.push(`Tambahan Malam (30%): ${formatRupiah(params.tambahanMalam)}`);
   if (params.totalMin && params.totalMax)
-    parts.push(`Estimasi Total: Rp${params.totalMin.toLocaleString()} – Rp${params.totalMax.toLocaleString()}`);
+    parts.push(`Estimasi Total: ${formatRupiah(params.totalMin)} – ${formatRupiah(params.totalMax)}`);
   parts.push("\nHarga akhir dapat disesuaikan berdasarkan kondisi di lapangan dan hasil kesepakatan.");
   return encodeURIComponent(parts.join("\n"));
 }
