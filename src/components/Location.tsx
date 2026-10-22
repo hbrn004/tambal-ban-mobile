@@ -1,6 +1,7 @@
 "use client";
-import { MapPin, Navigation, Clock, Wrench } from "lucide-react";
+import { MapPin, Navigation, Wrench } from "lucide-react";
 import { WA_LINK, waMessage } from "@/lib/constants";
+import OperatingStatus from "@/components/OperatingStatus";
 
 const GMAPS_URL = "https://maps.app.goo.gl/YMbunVqoNxckHquu8?g_st=ac";
 const GMAPS_EMBED =
@@ -72,24 +73,8 @@ export default function Location() {
               </div>
             </div>
 
-            {/* Jam Operasional */}
-            <div className="bg-white rounded-xl shadow-md border border-gray-100 p-5 md:p-7">
-              <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center shrink-0">
-                  <Clock className="w-5 h-5 text-red-600" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-gray-900 text-sm md:text-base mb-2">Jam Operasional</h3>
-                  <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-gray-600">Senin - Minggu</span>
-                      <span className="font-semibold text-gray-900">24 Jam</span>
-                    </div>
-                  </div>
-                  <p className="text-xs text-gray-400 mt-2">*Jam operasional dapat berubah sewaktu-waktu</p>
-                </div>
-              </div>
-            </div>
+            {/* Jam Operasional — live status, 18.00–05.00 WIB */}
+            <OperatingStatus variant="card" tone="light" />
           </div>
 
           {/* Right: Map */}

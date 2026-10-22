@@ -1,6 +1,7 @@
 "use client";
 import { Phone, Wrench } from "lucide-react";
 import { WA_LINK } from "@/lib/constants";
+import OperatingStatus from "@/components/OperatingStatus";
 import Image from "next/image";
 
 export default function Hero() {
@@ -55,9 +56,12 @@ export default function Hero() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0">
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed mb-6 max-w-2xl mx-auto md:mx-0">
             Layanan tambal ban panggilan yang siap datang langsung ke lokasi Anda. Melayani ban tubeless, ban dalam, penggantian ban dalam, hingga bantuan menuju bengkel terdekat.
           </p>
+
+          {/* Live operating status — open 18.00–05.00 WIB */}
+          <OperatingStatus className="mb-6 flex justify-center md:justify-start" />
 
           {/* CTA */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">
@@ -82,7 +86,7 @@ export default function Hero() {
           {/* Stats - hide on very small screens, show on md+ */}
           <div className="hidden md:grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/10 max-w-md">
             {[
-              { number: "24", label: "Jam Layanan" },
+              { number: "11", label: "Jam per Malam" },
               { number: "100+", label: "Pelanggan Puas" },
               { number: "30+", label: "Area Layanan" },
             ].map((stat) => (

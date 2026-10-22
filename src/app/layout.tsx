@@ -10,13 +10,13 @@ import AOSInit from "@/components/AOSInit";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Tambal Ban Mobile | Tambal Ban Panggilan 24 Jam",
+  title: "Tambal Ban Mobile | Tambal Ban Panggilan Malam Indramayu",
   description:
-    "Jasa Tambal Ban Mobile dan Tambal Ban Panggilan. Melayani tambal ban tubeless, ban dalam, ganti ban dalam, serta bantuan menuju bengkel terdekat di Indramayu.",
+    "Jasa Tambal Ban Mobile dan Tambal Ban Panggilan. Melayani tambal ban tubeless, ban dalam, ganti ban dalam, serta bantuan menuju bengkel terdekat di Indramayu. Buka setiap hari pukul 18.00–05.00 WIB.",
   openGraph: {
-    title: "Tambal Ban Mobile | Tambal Ban Panggilan 24 Jam",
+    title: "Tambal Ban Mobile | Tambal Ban Panggilan Malam Indramayu",
     description:
-      "Jasa Tambal Ban Mobile dan Tambal Ban Panggilan 24 Jam di Indramayu. Melayani Tambal Ban Lelea, Tambal Ban Pengauban, dan seluruh Kabupaten Indramayu.",
+      "Jasa Tambal Ban Mobile dan Tambal Ban Panggilan di Indramayu, buka setiap hari pukul 18.00–05.00 WIB. Melayani Tambal Ban Lelea, Tambal Ban Pengauban, dan seluruh Kabupaten Indramayu.",
     type: "website",
     locale: "id_ID",
   },
@@ -29,7 +29,8 @@ export const metadata: Metadata = {
     "Tambal Ban Panggilan Lelea",
     "Tambal Ban Mobile Indramayu",
     "Bengkel Tambal Ban Lelea",
-    "Tambal Ban 24 Jam Indramayu",
+    "Tambal Ban Malam Indramayu",
+    "Tambal Ban Panggilan Malam",
   ],
 };
 

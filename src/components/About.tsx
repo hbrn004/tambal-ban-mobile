@@ -3,11 +3,11 @@ import { MapPin, Clock, ShieldCheck, Wrench, CreditCard, Truck, Handshake } from
 
 const advantages = [
   { icon: MapPin, title: "Datang ke Lokasi", desc: "Kami datang langsung ke lokasi Anda, tidak perlu mendorong kendaraan jauh." },
-  { icon: Clock, title: "Cepat & 24 Jam", desc: "Proses penambalan cepat dengan peralatan lengkap, siap melayani kapan saja." },
+  { icon: Clock, title: "Cepat & Sigap", desc: "Proses penambalan cepat dengan peralatan lengkap, siap melayani setiap malam pukul 18.00–05.00 WIB." },
   { icon: ShieldCheck, title: "Harga Transparan", desc: "Tidak ada biaya tersembunyi. Harga jelas di awal sebelum pengerjaan." },
   { icon: Wrench, title: "Peralatan Lengkap", desc: "Dilengkapi alat tambal ban modern untuk segala jenis kerusakan ban." },
   { icon: CreditCard, title: "Pembayaran Mudah", desc: "Terima berbagai metode pembayaran untuk kenyamanan Anda." },
-  { icon: Truck, title: "Area Indramayu", desc: "Melayani area Indramayu dan sekitarnya 24 jam nonstop." },
+  { icon: Truck, title: "Area Indramayu", desc: "Melayani area Indramayu dan sekitarnya setiap hari pukul 18.00–05.00 WIB." },
   { icon: Handshake, title: "Harga Fleksibel", desc: "Kami mengutamakan musyawarah dan kesepakatan bersama pelanggan. Tarif perjalanan dapat disesuaikan agar tetap adil dan tidak memberatkan." },
 ];
 

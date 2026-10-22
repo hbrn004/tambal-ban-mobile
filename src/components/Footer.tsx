@@ -16,7 +16,7 @@ export default function Footer() {
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-bold">Tambal Ban Mobile</h3>
-                <p className="text-xs md:text-sm text-gray-400">Tambal Ban Panggilan 24 Jam</p>
+                <p className="text-xs md:text-sm text-gray-400">Tambal Ban Panggilan Malam</p>
               </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-md">
@@ -38,7 +38,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3 text-gray-400 text-sm">
                 <Clock className="w-4 h-4 text-red-500 shrink-0" />
-                <span>24 Jam Nonstop</span>
+                <span>Setiap hari, 18.00–05.00 WIB</span>
               </div>
             </div>
           </div>

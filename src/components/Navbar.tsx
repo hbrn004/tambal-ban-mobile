@@ -47,7 +47,7 @@ export default function Navbar() {
             </div>
             <div className="hidden xs:block">
               <h1 className="text-sm md:text-base font-bold text-gray-900 leading-tight">Tambal Ban Mobile</h1>
-              <p className="text-[10px] md:text-xs text-gray-400 -mt-0.5">Tambal Ban Panggilan 24 Jam</p>
+              <p className="text-[10px] md:text-xs text-gray-400 -mt-0.5">Tambal Ban Panggilan Malam</p>
             </div>
           </a>
 

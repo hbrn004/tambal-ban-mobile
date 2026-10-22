@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
-  { q: "Apakah melayani 24 jam?", a: "Ya, kami melayani 24 jam nonstop termasuk hari libur." },
+  { q: "Kapan jam operasionalnya?", a: "Kami buka setiap hari pukul 18.00–05.00 WIB. Di luar jam tersebut layanan tutup dan buka kembali pukul 18.00 WIB." },
   { q: "Apakah bisa ke rumah?", a: "Ya, kami bisa datang ke rumah, jalan raya, maupun lokasi lainnya." },
   { q: "Apakah melayani ban tubeless?", a: "Ya, kami melayani tambal ban tubeless dengan alat profesional." },
   { q: "Apakah melayani ban dalam?", a: "Ya, kami melayani tambal ban dalam (tube) untuk motor dan mobil." },
