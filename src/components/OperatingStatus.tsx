@@ -5,13 +5,13 @@ import { Clock } from "lucide-react";
 
 import {
   HOURS_LABEL,
-  HOURS_LABEL_SHORT,
+  HOURS_LINE_LABEL,
   getBusinessStatus,
   getMsUntilNextTransition,
   type BusinessStatus,
 } from "@/lib/business-hours";
 
-export type OperatingStatusVariant = "badge" | "card";
+export type OperatingStatusVariant = "hero" | "card";
 export type OperatingStatusTone = "dark" | "light";
 
 type StatusState = "open" | "closed" | "loading";
@@ -28,6 +28,9 @@ const LABELS: Record<StatusState, string> = {
   closed: "SEDANG TUTUP",
   loading: "MEMUAT STATUS",
 };
+
+/** Compact hours shown inside the pill on narrow screens. */
+const HOURS_COMPACT = "18.00–05.00 WIB";
 
 /**
  * Live operating status, recomputed from the browser clock.
@@ -50,7 +53,7 @@ function useBusinessStatus(): BusinessStatus | null {
       const next = getBusinessStatus();
 
       // Keep the previous object when nothing user-visible changed, so React
-      // can skip the re-render entirely.
+      // can skip the re-render (and the entrance animation stays put).
       setStatus((prev) =>
         prev && prev.state === next.state && prev.message === next.message ? prev : next,
       );
@@ -82,40 +85,80 @@ function useBusinessStatus(): BusinessStatus | null {
 function StatusBadge({
   state,
   tone,
-  className = "",
+  fullWidth = false,
+  fullHours = true,
 }: {
   state: StatusState;
   tone: OperatingStatusTone;
-  className?: string;
+  /** Stretch the pill to the full content width (card layout). */
+  fullWidth?: boolean;
+  /** Show the long schedule label next to the state (hero layout). */
+  fullHours?: boolean;
 }) {
   return (
     <span
-      className={`status-shell px-3 py-1.5 ${className}`}
+      className={`status-shell px-3 py-1.5 ${fullWidth ? "w-full" : ""}`}
       data-state={state}
       data-tone={tone}
     >
-      <span className="status-dot" aria-hidden="true" />
-      {/* Fixed min width: swapping MEMUAT STATUS -> SEDANG TUTUP must not
-          shift the surrounding layout. */}
-      <span className="status-fade min-w-[124px] text-xs font-bold tracking-wide whitespace-nowrap">
-        {LABELS[state]}
-      </span>
-      <span
-        className="hidden h-3 w-px bg-current opacity-20 sm:block"
-        aria-hidden="true"
-      />
-      <span className="hidden text-[11px] font-semibold whitespace-nowrap opacity-85 sm:block">
-        {HOURS_LABEL}
-      </span>
-      <span className="text-[10px] font-semibold whitespace-nowrap opacity-85 sm:hidden">
-        18.00–05.00 WIB
+      {/* Keyed by state so the sweep remounts (and replays) once per flip. */}
+      <span key={state} className="status-sheen" aria-hidden="true" />
+
+      <span className="status-content">
+        <span className="status-dot" aria-hidden="true" />
+        <span className="min-w-[96px] text-center text-[11px] font-bold tracking-wide whitespace-nowrap sm:min-w-[124px] sm:text-xs">
+          {LABELS[state]}
+        </span>
+        <span className="h-3 w-px shrink-0 bg-current opacity-20" aria-hidden="true" />
+
+        {fullHours ? (
+          <>
+            <span className="hidden text-[11px] font-semibold whitespace-nowrap opacity-85 sm:block">
+              {HOURS_LABEL}
+            </span>
+            <span className="text-[9px] font-semibold whitespace-nowrap opacity-85 sm:hidden">
+              {HOURS_COMPACT}
+            </span>
+          </>
+        ) : (
+          <span className="text-[9px] font-semibold whitespace-nowrap opacity-85 sm:text-[11px]">
+            {HOURS_COMPACT}
+          </span>
+        )}
       </span>
     </span>
   );
 }
 
+/**
+ * Animated status copy.
+ *
+ * The inner span is keyed by `state`, so `.status-desc-text` is remounted —
+ * and its fade-up replayed — only when the open/closed state actually flips,
+ * never on an incidental parent re-render.
+ */
+function StatusDescription({
+  state,
+  tone,
+  message,
+  className = "",
+}: {
+  state: StatusState;
+  tone: OperatingStatusTone;
+  message: string;
+  className?: string;
+}) {
+  return (
+    <p className={`status-desc ${className}`} data-state={state} data-tone={tone}>
+      <span key={state} className="status-desc-text">
+        {message}
+      </span>
+    </p>
+  );
+}
+
 export default function OperatingStatus({
-  variant = "badge",
+  variant = "hero",
   tone = "dark",
   className = "",
 }: {
@@ -125,12 +168,22 @@ export default function OperatingStatus({
 }) {
   const status = useBusinessStatus();
   const state: StatusState = status ? status.state : "loading";
-  const message = status?.message ?? `Memeriksa jam operasional…`;
+  const message = status?.message ?? "Memeriksa jam operasional…";
 
-  if (variant === "badge") {
+  if (variant === "hero") {
     return (
-      <div className={className} role="status" aria-live="polite">
+      <div
+        className={`flex flex-col items-center gap-2.5 md:items-start ${className}`}
+        role="status"
+        aria-live="polite"
+      >
         <StatusBadge state={state} tone={tone} />
+        <StatusDescription
+          state={state}
+          tone={tone}
+          message={message}
+          className="max-w-[34ch] px-2 text-center text-xs leading-relaxed sm:text-sm md:text-left"
+        />
       </div>
     );
   }
@@ -138,29 +191,34 @@ export default function OperatingStatus({
   return (
     <div className="relative overflow-hidden rounded-xl border border-gray-100 bg-white p-5 shadow-md md:p-7">
       <div
-        className="status-aura -top-10 -right-8 h-32 w-32"
+        className="status-aura -top-14 left-1/2 h-32 w-44 -translate-x-1/2"
         data-state={state}
         aria-hidden="true"
       />
-      <div className="relative flex items-start gap-3">
+
+      <div
+        className="relative flex flex-col items-center gap-3 text-center"
+        role="status"
+        aria-live="polite"
+      >
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-50">
           <Clock className="h-5 w-5 text-red-600" />
         </div>
-        <div className="min-w-0">
-          <h3 className="mb-2 text-sm font-bold text-gray-900 md:text-base">
-            Jam Operasional
-          </h3>
-          <div role="status" aria-live="polite">
-            <StatusBadge state={state} tone={tone} />
-            <p
-              key={state}
-              className="status-fade mt-2 min-h-[2.5rem] text-xs leading-relaxed text-gray-500"
-            >
-              {message}
-            </p>
-          </div>
-          <p className="mt-1 text-sm font-semibold text-gray-900">{HOURS_LABEL_SHORT}</p>
-        </div>
+
+        <h3 className="text-sm font-bold text-gray-900 md:text-base">Jam Operasional</h3>
+
+        <StatusBadge state={state} tone={tone} fullWidth fullHours={false} />
+
+        <StatusDescription
+          state={state}
+          tone={tone}
+          message={message}
+          className="max-w-[34ch] text-xs leading-relaxed sm:text-sm"
+        />
+
+        <p className="text-xs font-semibold tracking-wide text-gray-900 sm:text-sm">
+          {HOURS_LINE_LABEL}
+        </p>
       </div>
     </div>
   );

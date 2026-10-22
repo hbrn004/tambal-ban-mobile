@@ -173,28 +173,50 @@ test("evening open session points next opening at the next calendar day", () => 
 });
 
 /* ---------------------------------------------------------------- *
- * §6 — Dynamic copy for the closed state
+ * §6 — Dynamic copy for the open and closed states
  * ---------------------------------------------------------------- */
-test("just-closed window (05:00–11:59) explains the night ended", () => {
-  for (const hours of [5, 7, 11]) {
-    const status = getBusinessStatus(jakartaAt(hours, 30));
-    assert.equal(status.justClosed, true, `${hours}:30`);
-    assert.match(status.message, /Layanan malam telah berakhir/);
-    assert.match(status.message, /Buka kembali pukul 18\.00 WIB/);
+test("open state uses the 'ready to help' copy", () => {
+  for (const [h, m] of [
+    [18, 0],
+    [20, 0],
+    [23, 59],
+    [0, 0],
+    [2, 0],
+    [4, 59],
+  ]) {
+    const status = getBusinessStatus(jakartaAt(h, m));
+    assert.equal(status.isOpen, true, `${h}:${m}`);
+    assert.equal(status.message, "Kami siap membantu hingga pukul 05.00 WIB.");
   }
 });
 
-test("later daytime (12:00–17:59) uses the plain reopen message", () => {
-  for (const hours of [12, 15, 17]) {
-    const status = getBusinessStatus(jakartaAt(hours, 0));
-    assert.equal(status.justClosed, false, `${hours}:00`);
-    assert.equal(status.message, "Buka kembali pukul 18.00 WIB.");
+test("closed state uses the 'temporarily closed' copy", () => {
+  for (const [h, m] of [
+    [5, 0],
+    [12, 0],
+    [17, 59],
+  ]) {
+    const status = getBusinessStatus(jakartaAt(h, m));
+    assert.equal(status.isOpen, false, `${h}:${m}`);
+    assert.equal(
+      status.message,
+      "Layanan tutup sementara. Kami buka kembali pukul 18.00 WIB.",
+    );
   }
 });
 
-test("open state messages mention the 05.00 closing time", () => {
-  assert.match(getBusinessStatus(jakartaAt(20, 0)).message, /05\.00 WIB/);
-  assert.match(getBusinessStatus(jakartaAt(2, 0)).message, /05\.00 WIB/);
+test("copy depends only on state — never on the time of day within a state", () => {
+  const openMessages = new Set<string>();
+  const closedMessages = new Set<string>();
+
+  for (let minutes = 0; minutes < 24 * 60; minutes += 5) {
+    const status = getBusinessStatus(jakartaAt(Math.floor(minutes / 60), minutes % 60));
+    (status.isOpen ? openMessages : closedMessages).add(status.message);
+  }
+
+  assert.equal(openMessages.size, 1, "open copy must be identical all night");
+  assert.equal(closedMessages.size, 1, "closed copy must be identical all day");
+  assert.notEqual([...openMessages][0], [...closedMessages][0]);
 });
 
 /* ---------------------------------------------------------------- *

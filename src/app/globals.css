@@ -103,9 +103,26 @@ body {
   }
 }
 
-@keyframes status-fade-in {
-  from { opacity: 0; transform: translateY(-2px); }
+/* Description entrance — 10px rise + fade. Runs once per real status change
+   because React keys the element by `state`. */
+@keyframes status-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* One-shot light sweep across the badge background when the state flips. */
+@keyframes status-sheen-swipe {
+  from { transform: translateX(-170%); opacity: 0.85; }
+  70% { opacity: 0.45; }
+  to { transform: translateX(330%); opacity: 0; }
+}
+
+/* Slow highlight drifting through the description, then a long pause so it
+   never reads as a flickering marquee. */
+@keyframes status-desc-sweep {
+  0% { background-position: 160% 0; }
+  30% { background-position: -60% 0; }
+  100% { background-position: -60% 0; }
 }
 
 /* --- shell --------------------------------------------------- */
@@ -118,6 +135,7 @@ body {
   --dot-glow: rgba(156, 163, 175, 0.45);
   --text: #d1d5db;
   --surface: rgba(255, 255, 255, 0.07);
+  --sheen: rgba(156, 163, 175, 0.35);
 
   position: relative;
   display: inline-flex;
@@ -175,6 +193,7 @@ body {
   --dot-glow: rgba(34, 197, 94, 0.6);
   --text: #86efac;
   --surface: rgba(34, 197, 94, 0.1);
+  --sheen: rgba(74, 222, 128, 0.5);
 }
 
 .status-shell[data-state="closed"] {
@@ -186,6 +205,7 @@ body {
   --dot-glow: rgba(239, 68, 68, 0.6);
   --text: #fca5a5;
   --surface: rgba(239, 68, 68, 0.1);
+  --sheen: rgba(248, 113, 113, 0.5);
 }
 
 /* Light-tone override for cards on white backgrounds. Declared after the
@@ -217,10 +237,95 @@ body {
   animation: status-dot-pulse 2.8s ease-in-out infinite;
 }
 
-/* --- label cross-fade ---------------------------------------- */
-.status-fade {
+/* --- badge content row --------------------------------------- */
+/* Centred flex row so dot + label + hours share one vertical axis in
+   both the compact hero pill and the full-width card pill. */
+.status-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+/* --- one-shot sheen over the badge background ---------------- */
+.status-sheen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.status-sheen::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  bottom: -60%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, var(--sheen), transparent);
+  transform: translateX(-170%);
+  animation: status-sheen-swipe 1.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* --- animated description ------------------------------------ */
+.status-desc {
+  --desc-text: #9ca3af;
+  --desc-sweep: rgba(156, 163, 175, 0.16);
+  --desc-glow: rgba(156, 163, 175, 0.2);
+
+  color: var(--desc-text);
+  background-image: linear-gradient(
+    100deg,
+    transparent 34%,
+    var(--desc-sweep) 50%,
+    transparent 66%
+  );
+  background-size: 220% 100%;
+  background-repeat: no-repeat;
+  background-position: 160% 0;
+  animation: status-desc-sweep 9s ease-in-out infinite;
+  transition: color 0.6s ease;
+}
+
+.status-desc[data-state="open"] {
+  --desc-text: #86efac;
+  --desc-sweep: rgba(74, 222, 128, 0.24);
+  --desc-glow: rgba(34, 197, 94, 0.4);
+}
+
+.status-desc[data-state="closed"] {
+  --desc-text: #fca5a5;
+  --desc-sweep: rgba(248, 113, 113, 0.22);
+  --desc-glow: rgba(239, 68, 68, 0.4);
+}
+
+/* Light tone keeps the copy dark enough to read on white cards. */
+.status-desc[data-tone="light"][data-state="open"] {
+  --desc-text: #15803d;
+  --desc-sweep: rgba(34, 197, 94, 0.18);
+  --desc-glow: rgba(34, 197, 94, 0.2);
+}
+
+.status-desc[data-tone="light"][data-state="closed"] {
+  --desc-text: #b91c1c;
+  --desc-sweep: rgba(239, 68, 68, 0.16);
+  --desc-glow: rgba(239, 68, 68, 0.18);
+}
+
+.status-desc[data-tone="light"][data-state="loading"] {
+  --desc-text: #6b7280;
+}
+
+/* Remounted only when `state` changes, so the rise plays on a real status
+   flip — never on an unrelated re-render. */
+.status-desc-text {
   display: inline-block;
-  animation: status-fade-in 0.6s ease both;
+  animation: status-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  text-shadow: 0 0 16px var(--desc-glow);
 }
 
 /* --- soft aura behind a card --------------------------------- */
@@ -251,7 +356,9 @@ body {
   .status-shell,
   .status-shell::before,
   .status-dot,
-  .status-fade {
+  .status-sheen::after,
+  .status-desc,
+  .status-desc-text {
     animation: none !important;
     transition-duration: 0.01ms !important;
   }
@@ -260,6 +367,17 @@ body {
   .status-shell::before {
     background: var(--ring-border-strong);
     opacity: 1;
+  }
+
+  /* No drifting highlight — solid colour, still fully legible. */
+  .status-desc {
+    background-image: none;
+  }
+
+  .status-desc-text {
+    opacity: 1;
+    transform: none;
+    text-shadow: none;
   }
 
   .status-aura {

@@ -61,7 +61,7 @@ export default function Hero() {
           </p>
 
           {/* Live operating status — open 18.00–05.00 WIB */}
-          <OperatingStatus className="mb-6 flex justify-center md:justify-start" />
+          <OperatingStatus variant="hero" className="mb-6 md:mb-7" />
 
           {/* CTA */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start">

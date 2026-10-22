@@ -35,6 +35,8 @@ export const JUST_CLOSED_UNTIL_MINUTE = 12 * 60;
 
 export const HOURS_LABEL = "BUKA SETIAP HARI | 18.00–05.00 WIB";
 export const HOURS_LABEL_SHORT = "Setiap hari, pukul 18.00–05.00 WIB";
+/** Single-line schedule used under the card description. */
+export const HOURS_LINE_LABEL = "Setiap Hari • 18.00–05.00 WIB";
 export const OPEN_TIME_LABEL = "18.00 WIB";
 export const CLOSE_TIME_LABEL = "05.00 WIB";
 
@@ -176,16 +178,11 @@ export function getBusinessStatus(date: Date = new Date()): BusinessStatus {
     jakarta.minuteOfDay >= CLOSE_MINUTE_OF_DAY &&
     jakarta.minuteOfDay < JUST_CLOSED_UNTIL_MINUTE;
 
-  let message: string;
-  if (isOpen && jakarta.minuteOfDay >= OPEN_MINUTE_OF_DAY) {
-    message = `Kami buka sekarang hingga pukul ${CLOSE_TIME_LABEL}.`;
-  } else if (isOpen) {
-    message = `Layanan malam masih berjalan hingga pukul ${CLOSE_TIME_LABEL}.`;
-  } else if (justClosed) {
-    message = `Layanan malam telah berakhir. Buka kembali pukul ${OPEN_TIME_LABEL}.`;
-  } else {
-    message = `Buka kembali pukul ${OPEN_TIME_LABEL}.`;
-  }
+  // Copy is driven purely by the live state so both placements (hero badge
+  // and operating-hours card) can never disagree.
+  const message = isOpen
+    ? `Kami siap membantu hingga pukul ${CLOSE_TIME_LABEL}.`
+    : `Layanan tutup sementara. Kami buka kembali pukul ${OPEN_TIME_LABEL}.`;
 
   return {
     isOpen,
