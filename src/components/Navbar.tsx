@@ -29,22 +29,22 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 h-12 md:h-16 ${
-        scrolled ? "bg-white/95 backdrop-blur-md shadow-md" : "bg-white/80 backdrop-blur-sm"
+        scrolled ? "bg-white/95 backdrop-blur-md shadow-md" : "bg-white/90 backdrop-blur-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex items-center justify-between h-full">
-          {/* Logo navbar - small */}
+          {/* Logo navbar - small, pre-sized for a crisp render */}
           <a href="#home" className="flex items-center gap-2 md:gap-3">
-            <div className="relative h-8 w-[35px] md:h-10 md:w-[44px]">
-              <Image
-                src="/images/logo-tbm-light.png"
-                alt="Logo TBM Tambal Ban Mobile"
-                fill
-                className="object-contain"
-                sizes="44px"
-              />
-            </div>
+            <Image
+              src="/images/logo-tbm-navbar.png"
+              alt="Logo TBM Tambal Ban Mobile"
+              width={182}
+              height={168}
+              priority
+              unoptimized
+              className="h-[40px] w-auto object-contain md:h-[52px]"
+            />
             <div className="hidden xs:block">
               <h1 className="text-sm md:text-base font-bold text-gray-900 leading-tight">Tambal Ban Mobile</h1>
               <p className="text-[10px] md:text-xs text-gray-400 -mt-0.5">Tambal Ban Panggilan Malam</p>
