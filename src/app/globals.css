@@ -1,9 +1,32 @@
 @import "tailwindcss";
 
+/*
+ * Brand red.
+ *
+ * Stock Tailwind red-600 (#DC2626) is a bright, slightly orange red. The TBM
+ * monogram is a deeper crimson (#CA1418) and the approved brand reference is
+ * #BB0B12, so the stock palette read as a different red next to the logo.
+ * Remapping the scale here keeps every existing red-* utility working while
+ * making the whole site sit in the logo's colour family.
+ */
+@theme {
+  --color-red-50: #FEF1F1;
+  --color-red-100: #FCDCDD;
+  --color-red-200: #F7B2B5;
+  --color-red-300: #F07F84;
+  --color-red-400: #E54A51;
+  --color-red-500: #D61A22;
+  --color-red-600: #BB0B12;
+  --color-red-700: #99090F;
+  --color-red-800: #7E070C;
+  --color-red-900: #66060A;
+  --color-red-950: #3D0306;
+}
+
 :root {
-  --primary: #DC2626;
-  --primary-dark: #B91C1C;
-  --dark: #1A1A1A;
+  --primary: #BB0B12;
+  --primary-dark: #99090F;
+  --dark: #0F1014;
 }
 
 * {
@@ -197,15 +220,15 @@ body {
 }
 
 .status-shell[data-state="closed"] {
-  --ring: #ef4444;
-  --ring-border: rgba(239, 68, 68, 0.38);
-  --ring-border-strong: rgba(248, 113, 113, 0.65);
-  --ring-shadow: rgba(239, 68, 68, 0.5);
-  --dot: #f87171;
-  --dot-glow: rgba(239, 68, 68, 0.6);
-  --text: #fca5a5;
-  --surface: rgba(239, 68, 68, 0.1);
-  --sheen: rgba(248, 113, 113, 0.5);
+  --ring: #d61a22;
+  --ring-border: rgba(214, 26, 34, 0.38);
+  --ring-border-strong: rgba(229, 74, 81, 0.65);
+  --ring-shadow: rgba(214, 26, 34, 0.5);
+  --dot: #e54a51;
+  --dot-glow: rgba(214, 26, 34, 0.6);
+  --text: #f07f84;
+  --surface: rgba(214, 26, 34, 0.1);
+  --sheen: rgba(229, 74, 81, 0.5);
 }
 
 /* Light-tone override for cards on white backgrounds. Declared after the
@@ -216,8 +239,8 @@ body {
 }
 
 .status-shell[data-tone="light"][data-state="closed"] {
-  --text: #b91c1c;
-  --surface: rgba(239, 68, 68, 0.1);
+  --text: #99090f;
+  --surface: rgba(214, 26, 34, 0.1);
 }
 
 .status-shell[data-tone="light"][data-state="loading"] {
@@ -298,9 +321,9 @@ body {
 }
 
 .status-desc[data-state="closed"] {
-  --desc-text: #fca5a5;
-  --desc-sweep: rgba(248, 113, 113, 0.22);
-  --desc-glow: rgba(239, 68, 68, 0.4);
+  --desc-text: #f07f84;
+  --desc-sweep: rgba(229, 74, 81, 0.22);
+  --desc-glow: rgba(214, 26, 34, 0.4);
 }
 
 /* Light tone keeps the copy dark enough to read on white cards. */
@@ -311,9 +334,9 @@ body {
 }
 
 .status-desc[data-tone="light"][data-state="closed"] {
-  --desc-text: #b91c1c;
-  --desc-sweep: rgba(239, 68, 68, 0.16);
-  --desc-glow: rgba(239, 68, 68, 0.18);
+  --desc-text: #99090f;
+  --desc-sweep: rgba(214, 26, 34, 0.16);
+  --desc-glow: rgba(214, 26, 34, 0.18);
 }
 
 .status-desc[data-tone="light"][data-state="loading"] {
@@ -343,7 +366,7 @@ body {
 }
 
 .status-aura[data-state="closed"] {
-  background-color: rgba(239, 68, 68, 0.45);
+  background-color: rgba(214, 26, 34, 0.45);
 }
 
 .status-aura[data-state="loading"] {
