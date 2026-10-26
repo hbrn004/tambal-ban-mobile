@@ -42,7 +42,8 @@ export default function RootLayout({
   return (
     <html lang="id">
       <head>
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/images/logo-tbm-icon.png" />
+        <link rel="apple-touch-icon" href="/images/logo-tbm-icon.png" />
       </head>
       <body className={inter.className}>
         <AOSInit />

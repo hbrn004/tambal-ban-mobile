@@ -38,7 +38,7 @@ export default function Navbar() {
           <a href="#home" className="flex items-center gap-2 md:gap-3">
             <div className="relative h-8 w-[35px] md:h-10 md:w-[44px]">
               <Image
-                src="/images/logo-tbm-transparent.png"
+                src="/images/logo-tbm-light.png"
                 alt="Logo TBM Tambal Ban Mobile"
                 fill
                 className="object-contain"

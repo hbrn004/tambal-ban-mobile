@@ -11,8 +11,14 @@ export default function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2">
             <div className="flex items-center gap-3 mb-3">
-              <div className="relative w-9 h-9 md:w-10 md:h-10 shrink-0">
-                <Image src="/logo.png" alt="Tambal Ban Mobile" fill className="object-contain" sizes="40px" />
+              <div className="relative h-9 w-[40px] md:h-10 md:w-[44px] shrink-0">
+                <Image
+                  src="/images/logo-tbm-transparent.png"
+                  alt="Logo TBM Tambal Ban Mobile"
+                  fill
+                  className="object-contain"
+                  sizes="44px"
+                />
               </div>
               <div>
                 <h3 className="text-base md:text-lg font-bold">Tambal Ban Mobile</h3>
