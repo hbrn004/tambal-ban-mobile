@@ -27,16 +27,16 @@ export default function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 w-full">
         <div className="max-w-3xl mx-auto md:mx-0 text-center md:text-left" data-aos="fade-up">
-          {/* Logo kecil di hero */}
-          <div className="flex justify-center md:justify-start mb-6">
-            <div className="relative w-[140px] h-[140px] sm:w-[180px] sm:h-[180px] lg:w-[200px] lg:h-[200px]">
+          {/* Logo TBM */}
+          <div className="flex justify-center md:justify-start mb-5 md:mb-6">
+            <div className="relative w-[190px] h-[172px] sm:w-[220px] sm:h-[199px] lg:w-[250px] lg:h-[226px]">
               <Image
-                src="/logo.png"
-                alt="Tambal Ban Mobile"
+                src="/images/logo-tbm-transparent.png"
+                alt="Logo TBM Tambal Ban Mobile"
                 fill
                 className="object-contain drop-shadow-2xl"
                 priority
-                sizes="200px"
+                sizes="(max-width: 640px) 190px, (max-width: 1024px) 220px, 250px"
               />
             </div>
           </div>
