@@ -36,13 +36,13 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-full">
           {/* Logo navbar - small */}
           <a href="#home" className="flex items-center gap-2 md:gap-3">
-            <div className="relative w-7 h-7 md:w-9 md:h-9">
+            <div className="relative h-8 w-[35px] md:h-10 md:w-[44px]">
               <Image
-                src="/logo.png"
-                alt="Tambal Ban Mobile"
+                src="/images/logo-tbm-transparent.png"
+                alt="Logo TBM Tambal Ban Mobile"
                 fill
                 className="object-contain"
-                sizes="36px"
+                sizes="44px"
               />
             </div>
             <div className="hidden xs:block">
