@@ -4,7 +4,7 @@ import { MessageSquare, MapPin, AlertCircle, Truck, Wrench, Wallet } from "lucid
 const steps = [
   { icon: MessageSquare, title: "Hubungi WhatsApp", desc: "Hubungi kami via WhatsApp untuk melaporkan kendala Anda." },
   { icon: MapPin, title: "Kirim Lokasi", desc: "Bagikan lokasi Anda melalui fitur lokasi WhatsApp." },
-  { icon: AlertCircle, title: "Jelaskan Kendala", desc: "Ceritakan kondisi ban dan kendala yang Anda alami." },
+  { icon: AlertCircle, title: "Jelaskan Kendala", desc: "Ceritakan kondisi ban motor dan kendala yang Anda alami." },
   { icon: Truck, title: "Kami Berangkat", desc: "Tim kami segera berangkat menuju lokasi Anda." },
   { icon: Wrench, title: "Pengerjaan", desc: "Pengerjaan tambal ban cepat dan profesional di tempat." },
   { icon: Wallet, title: "Pembayaran", desc: "Pembayaran dilakukan setelah pengerjaan selesai." },

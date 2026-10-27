@@ -15,7 +15,7 @@ const items = [
   {
     icon: Camera,
     title: "Foto Kendala",
-    desc: "Mohon kirim foto ban atau komponen yang mengalami masalah (ban bocor, ban sobek, pentil rusak, ban dalam bocor, atau kendala lainnya) agar teknisi dapat menyiapkan peralatan yang sesuai.",
+    desc: "Mohon kirim foto ban motor atau komponen yang mengalami masalah (ban bocor, ban sobek, pentil rusak, ban dalam bocor, atau kendala lainnya) agar teknisi dapat menyiapkan peralatan yang sesuai.",
   },
   {
     icon: MapPinned,

@@ -2,7 +2,7 @@
 import { MapPin, Clock, ShieldCheck, Wrench, CreditCard, Truck, Handshake } from "lucide-react";
 
 const advantages = [
-  { icon: MapPin, title: "Datang ke Lokasi", desc: "Kami datang langsung ke lokasi Anda, tidak perlu mendorong kendaraan jauh." },
+  { icon: MapPin, title: "Datang ke Lokasi", desc: "Kami datang langsung ke lokasi Anda, tidak perlu mendorong motor jauh." },
   { icon: Clock, title: "Cepat & Sigap", desc: "Proses penambalan cepat dengan peralatan lengkap, siap melayani setiap malam pukul 18.00–05.00 WIB." },
   { icon: ShieldCheck, title: "Harga Transparan", desc: "Tidak ada biaya tersembunyi. Harga jelas di awal sebelum pengerjaan." },
   { icon: Wrench, title: "Peralatan Lengkap", desc: "Dilengkapi alat tambal ban modern untuk segala jenis kerusakan ban." },
@@ -21,7 +21,7 @@ export default function About() {
             Kenapa Memilih Kami?
           </h2>
           <p className="text-gray-600 text-sm md:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto">
-            Kami hadir membantu pengendara yang mengalami ban bocor di jalan tanpa harus mendorong kendaraan jauh.
+            Kami hadir membantu pengendara sepeda motor yang mengalami ban bocor di jalan tanpa harus mendorong motor jauh.
             Kami datang langsung ke lokasi pelanggan dengan peralatan lengkap sehingga proses menjadi lebih cepat, aman, dan praktis.
           </p>
         </div>

@@ -15,7 +15,7 @@ export default function Pricing() {
             Perhitungan Biaya
           </h2>
           <p className="text-gray-600 text-sm md:text-base lg:text-lg">
-            Biaya perjalanan dihitung berdasarkan jarak tempuh. Biaya jasa tambal dihitung terpisah sesuai tingkat pekerjaan.
+            Biaya perjalanan dihitung berdasarkan jarak tempuh. Biaya jasa tambal ban motor dihitung terpisah sesuai tingkat pekerjaan.
           </p>
         </div>
 

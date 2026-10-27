@@ -26,7 +26,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-md">
-              Layanan tambal ban panggilan yang siap datang ke lokasi Anda di wilayah Indramayu dan sekitarnya. Cepat, profesional, dan harga transparan.
+              Layanan tambal ban panggilan khusus sepeda motor yang siap datang ke lokasi Anda di wilayah Indramayu dan sekitarnya. Cepat, profesional, dan harga transparan.
             </p>
           </div>
 
@@ -74,9 +74,9 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-sm md:text-base mb-3 md:mb-4">Layanan</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li>Tambal Ban Tubeless</li>
-              <li>Tambal Ban Dalam</li>
-              <li>Ganti Ban Dalam</li>
+              <li>Tambal Ban Tubeless Motor</li>
+              <li>Tambal Ban Dalam Motor</li>
+              <li>Ganti Ban Dalam Motor</li>
             </ul>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { Phone } from "lucide-react";
 import { WA_LINK, WA_PREP_NOTE } from "@/lib/constants";
 
 export default function CTA() {
-  const waLink = `${WA_LINK}?text=${encodeURIComponent(WA_PREP_NOTE + "Halo, saya ingin menggunakan jasa Tambal Ban Mobile.")}`;
+  const waLink = `${WA_LINK}?text=${encodeURIComponent(WA_PREP_NOTE + "Halo, saya ingin menggunakan jasa Tambal Ban Mobile untuk sepeda motor.")}`;
   return (
     <section className="py-16 md:py-20 lg:py-28 bg-gradient-to-br from-red-600 to-red-700 relative overflow-hidden">
       <div className="absolute inset-0">
@@ -13,7 +13,7 @@ export default function CTA() {
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
         <h2 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-white mb-2 leading-tight">
-          Ban Bocor?
+          Ban Motor Bocor?
         </h2>
         <p className="text-base md:text-xl text-red-100 mb-8 md:mb-10">Tidak perlu panik. Hubungi kami sekarang juga.</p>
         <a

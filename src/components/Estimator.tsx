@@ -54,7 +54,7 @@ export default function Estimator() {
             Kalkulator Biaya
           </h2>
           <p className="text-gray-600 text-sm md:text-base">
-            Hitung estimasi biaya perjalanan dan layanan dengan mudah.
+            Hitung estimasi biaya perjalanan dan layanan sepeda motor dengan mudah.
           </p>
         </div>
 

@@ -28,9 +28,9 @@ export interface ServiceConfig {
 
 /** Authoritative service catalogue. UI must never take prices from user input. */
 export const SERVICES: readonly ServiceConfig[] = [
-  { id: "tubeless", label: "Tambal Ban Tubeless", priceMin: 15000, priceMax: 20000 },
-  { id: "tube", label: "Tambal Ban Dalam", priceMin: 15000, priceMax: 20000 },
-  { id: "ganti", label: "Ganti Ban Dalam", priceMin: 45000, priceMax: 50000 },
+  { id: "tubeless", label: "Tambal Ban Tubeless Motor", priceMin: 15000, priceMax: 20000 },
+  { id: "tube", label: "Tambal Ban Dalam Motor", priceMin: 15000, priceMax: 20000 },
+  { id: "ganti", label: "Ganti Ban Dalam Motor", priceMin: 45000, priceMax: 50000 },
 ] as const;
 
 /** Look up a service by id. Returns undefined when the id is not in the catalogue. */

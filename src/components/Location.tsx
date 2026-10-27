@@ -22,7 +22,7 @@ export default function Location() {
             Bengkel Offline Kami
           </h2>
           <p className="text-gray-600 text-sm md:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto">
-            Selain melayani Tambal Ban Mobile dan Tambal Ban Panggilan, kami juga memiliki bengkel offline yang dapat Anda kunjungi secara langsung.
+            Selain melayani Tambal Ban Mobile dan Tambal Ban Panggilan khusus sepeda motor, kami juga memiliki bengkel offline yang dapat Anda kunjungi secara langsung.
           </p>
         </div>
 

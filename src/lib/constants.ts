@@ -3,7 +3,7 @@ import { formatRupiah } from "@/lib/pricing";
 export const WA_NUMBER = "6283143401874";
 export const WA_LINK = `https://wa.me/${WA_NUMBER}`;
 
-export const WA_PREP_NOTE = "Mohon siapkan:\n✅ Live Location\n✅ Foto ban atau komponen yang bermasalah\n✅ Nomor telepon aktif yang dapat dihubungi\n\nAgar teknisi dapat segera berangkat ke lokasi.\n";
+export const WA_PREP_NOTE = "Mohon siapkan:\n✅ Live Location\n✅ Foto ban motor atau komponen yang bermasalah\n✅ Nomor telepon aktif yang dapat dihubungi\n\nAgar teknisi dapat segera berangkat ke lokasi.\n";
 
 export function waMessage(params: {
   nama?: string;
@@ -21,7 +21,7 @@ export function waMessage(params: {
 }): string {
   const parts: string[] = [];
   if (params.denganPersiapan) parts.push(WA_PREP_NOTE);
-  parts.push("Halo, saya ingin menggunakan jasa Tambal Ban Mobile.");
+  parts.push("Halo, saya ingin menggunakan jasa Tambal Ban Mobile untuk sepeda motor.");
   if (params.nama) parts.push(`\nNama: ${params.nama}`);
   if (params.lokasi) parts.push(`Lokasi: ${params.lokasi}`);
   if (params.jarak) parts.push(`Jarak: ${params.jarak} KM`);

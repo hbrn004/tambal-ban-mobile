@@ -5,20 +5,20 @@ import { WA_LINK, waMessage, WA_PREP_NOTE } from "@/lib/constants";
 const services = [
   {
     icon: Wrench,
-    title: "Tambal Ban Tubeless",
-    desc: "Penambalan ban tubeless menggunakan alat profesional. Cepat dan rapi tanpa perlu membongkar ban.",
+    title: "Tambal Ban Tubeless Motor",
+    desc: "Penambalan ban tubeless sepeda motor menggunakan alat profesional. Cepat dan rapi tanpa perlu membongkar ban.",
     price: "Rp15.000 – Rp20.000",
   },
   {
     icon: Settings,
-    title: "Tambal Ban Dalam",
-    desc: "Penambalan ban dalam dengan pengerjaan rapi. Cocok untuk motor dan mobil dengan ban dalam.",
+    title: "Tambal Ban Dalam Motor",
+    desc: "Penambalan ban dalam sepeda motor dengan pengerjaan rapi dan hasil yang maksimal.",
     price: "Rp15.000 – Rp20.000",
   },
   {
     icon: Truck,
-    title: "Ganti Ban Dalam",
-    desc: "Melayani penggantian ban dalam apabila ban sudah tidak layak ditambal.",
+    title: "Ganti Ban Dalam Motor",
+    desc: "Melayani penggantian ban dalam sepeda motor apabila ban sudah tidak layak ditambal.",
     price: "Rp45.000 – Rp50.000",
   },
 ];
@@ -33,7 +33,7 @@ export default function Services() {
             Layanan Kami
           </h2>
           <p className="text-gray-600 text-sm md:text-base lg:text-lg">
-            Berbagai layanan tambal ban yang siap membantu Anda kapan saja.
+            Berbagai layanan tambal ban khusus sepeda motor yang siap membantu Anda kapan saja.
           </p>
         </div>
 

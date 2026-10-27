@@ -57,7 +57,7 @@ export default function Hero() {
 
           {/* Subtitle */}
           <p className="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed mb-6 max-w-2xl mx-auto md:mx-0">
-            Layanan tambal ban panggilan yang siap datang langsung ke lokasi Anda. Melayani ban tubeless, ban dalam, penggantian ban dalam, hingga bantuan menuju bengkel terdekat.
+            Layanan tambal ban panggilan khusus sepeda motor yang siap datang langsung ke lokasi Anda. Melayani tambal ban tubeless motor, tambal ban dalam motor, penggantian ban dalam sepeda motor, hingga bantuan menuju bengkel terdekat.
           </p>
 
           {/* Live operating status — open 18.00–05.00 WIB */}

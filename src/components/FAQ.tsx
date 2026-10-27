@@ -4,11 +4,11 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   { q: "Kapan jam operasionalnya?", a: "Kami buka setiap hari pukul 18.00–05.00 WIB. Di luar jam tersebut layanan tutup dan buka kembali pukul 18.00 WIB." },
-  { q: "Apakah bisa ke rumah?", a: "Ya, kami bisa datang ke rumah, jalan raya, maupun lokasi lainnya." },
-  { q: "Apakah melayani ban tubeless?", a: "Ya, kami melayani tambal ban tubeless dengan alat profesional." },
-  { q: "Apakah melayani ban dalam?", a: "Ya, kami melayani tambal ban dalam (tube) untuk motor dan mobil." },
-  { q: "Apakah bisa mengganti ban dalam?", a: "Ya, kami melayani penggantian ban dalam jika ban sudah tidak layak." },
-  { q: "Bagaimana jika tidak bisa diperbaiki?", a: "Kami siap membantu membawa kendaraan ke bengkel terdekat." },
+  { q: "Apakah bisa ke rumah?", a: "Ya, kami bisa datang ke rumah, jalan raya, maupun lokasi lainnya untuk sepeda motor Anda." },
+  { q: "Apakah melayani ban tubeless?", a: "Ya, kami melayani tambal ban tubeless sepeda motor dengan alat profesional." },
+  { q: "Apakah melayani ban dalam?", a: "Ya, kami melayani tambal ban dalam (tube) khusus sepeda motor." },
+  { q: "Apakah bisa mengganti ban dalam?", a: "Ya, kami melayani penggantian ban dalam sepeda motor jika ban sudah tidak layak." },
+  { q: "Bagaimana jika tidak bisa diperbaiki?", a: "Kami siap membantu membawa sepeda motor Anda ke bengkel terdekat." },
 ];
 
 export default function FAQ() {
